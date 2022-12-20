@@ -46,6 +46,12 @@ public class Appointment {
 		this.patientId=pId;
 	}
 
+	public Appointment(String startDate, long patientId) {
+		super();
+		this.startDate = dateGenerator(startDate);
+		this.patientId = patientId;
+	}
+
 	public static Date dateGenerator(String time) {
 		String target = time;
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");

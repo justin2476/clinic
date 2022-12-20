@@ -44,4 +44,29 @@ public class AppointmentController {
 			return "not booked";
 	}
 
+	@PutMapping("cancelAppointment")
+	public String cancelAppointment(@RequestBody Appointment app) {
+		Appointment ap = appRepo.findTopByPatientIdAndStartDate(app.getPatientId(), app.getStartDate());
+		if(ap!=null) {
+			ap.setBooked(false);
+			ap.setPatientId(0);
+			appRepo.save(ap);
+			return "cancelled";
+		}
+		else
+			return "not cancelled";
+	}
+	@PutMapping("attendAppointment")
+	public String attendAppointment(@RequestBody Appointment app) {
+		Appointment ap = appRepo.findTopByPatientIdAndStartDate(app.getPatientId(),app.getStartDate());
+		if(ap!=null)
+		{
+			ap.setAttented(true);
+			appRepo.save(ap);
+			return "Attended";
+		}
+		else
+		return "Not Attended";
+	}
+
 }
